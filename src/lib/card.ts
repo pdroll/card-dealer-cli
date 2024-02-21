@@ -7,6 +7,7 @@ export const Suits = {
 export type Suit = (typeof Suits)[keyof typeof Suits]
 
 export const Ranks = {
+  JOKER: 0,
   2: 2,
   3: 3,
   4: 4,
@@ -37,6 +38,8 @@ export class Card {
     const rankName = Object.keys(Ranks).find((rankName) => {
       if (Ranks[rankName] === this.rank) return rankName
     })
+
+    if (this.rank === Ranks.JOKER) return 'Joker'
     return `${this.suit} ${rankName}`
   }
 }

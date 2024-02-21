@@ -2,9 +2,10 @@ import { FullDeck, EuchreDeck } from '@lib/deck'
 
 const euchreDeck = new EuchreDeck()
 const fullDeck = new FullDeck()
+fullDeck.addJokers()
 
 console.log(
-  'Three Random Cards from a full deck:',
+  'Three Random Cards from a full deck with jokers:',
   `${fullDeck.takeRandomCard()}`,
   `${fullDeck.takeRandomCard()}`,
   `${fullDeck.takeRandomCard()}`,
@@ -34,6 +35,4 @@ console.log('\n\nTurned Up')
 console.log('==============\n')
 console.log(turnedUp?.toString())
 
-console.log('\nKitty')
-console.log('==============\n')
-console.log(euchreDeck.showCards())
+console.log('\nKitty', euchreDeck.showCards())

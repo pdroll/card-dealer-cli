@@ -66,8 +66,14 @@ export class FullDeck extends Deck {
     super()
     Object.values(Suits).map((suit) => {
       Object.values(Ranks).map((rank) => {
-        this.cards.push(new Card({ rank, suit }))
+        if (rank > 0) this.cards.push(new Card({ rank, suit }))
       })
+    })
+  }
+
+  addJokers(numberOfJokers = 2) {
+    times(numberOfJokers, () => {
+      this.cards.push(new Card({ rank: Ranks.JOKER, suit: Suits.SPADES }))
     })
   }
 }
