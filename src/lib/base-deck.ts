@@ -23,8 +23,9 @@ export abstract class BaseDeck {
     return [...this.cards].map((c) => c.toString())
   }
 
-  private getAboutHalfOfTheCards() {
-    const aboutHalf = Math.floor(random(0.3, 0.7, true) * this.count)
+  private getAboutHalfOfTheCards(exacltyHalf = false) {
+    const splitPercentage = exacltyHalf ? 0.5 : random(0.4, 0.6, true)
+    const aboutHalf = Math.floor(splitPercentage * this.count)
 
     return [this.cards.slice(0, aboutHalf), this.cards.slice(aboutHalf)]
   }
@@ -34,23 +35,30 @@ export abstract class BaseDeck {
     this.cards = [...halfB, ...halfA]
   }
 
-  riffleShuffle(numberOfShuffles = 1) {
+  riffleShuffle(numberOfShuffles = 1, perfectShuffle = false) {
     times(numberOfShuffles, () => {
       // Randomize the order of our two stacks
-      // because it should be random which stack
-      // gets slotted in first
-      const stacks = shuffle(this.getAboutHalfOfTheCards())
+      // to randomize if it will be an "in shuffle" or an "out shuffle"
+      // https://link.pdroll.com/riffle
+      const stacks = shuffle(this.getAboutHalfOfTheCards(perfectShuffle))
       const [stackA, stackB] = stacks
-      const stackCardCount = Math.max(stackA.length, stackB.length)
+
       const shuffledCards: Card[] = []
 
-      times(stackCardCount, () => {
-        const stackACard = stackA.shift()
-        const stackBCard = stackB.shift()
+      do {
+        const maxTake = perfectShuffle ? 1 : 3
+        const stackATake = Math.min(random(1, maxTake), stackA.length)
+        times(stackATake, () => {
+          const stackACard = stackA.shift()
+          if (stackACard) shuffledCards.push(stackACard)
+        })
 
-        if (stackACard) shuffledCards.push(stackACard)
-        if (stackBCard) shuffledCards.push(stackBCard)
-      })
+        const stackBTake = Math.min(random(1, maxTake), stackB.length)
+        times(stackBTake, () => {
+          const stackBCard = stackB.shift()
+          if (stackBCard) shuffledCards.push(stackBCard)
+        })
+      } while (stackA.length > 0 || stackB.length > 0)
 
       this.cards = shuffledCards
     })
