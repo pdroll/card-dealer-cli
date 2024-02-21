@@ -1,4 +1,4 @@
-import { FullDeck, EuchreDeck } from '@lib/deck'
+import { FullDeck, EuchreDeck, CanastaDeck } from '@lib/deck'
 
 const euchreDeck = new EuchreDeck()
 const fullDeck = new FullDeck()
@@ -13,7 +13,8 @@ console.log(
 
 console.log('\n\n============================\n')
 
-euchreDeck.shuffle(5)
+euchreDeck.riffleShuffle(7)
+euchreDeck.cut()
 
 const hands = euchreDeck.dealHands({ cardsPerHand: 5, numberOfHands: 4 })
 

@@ -8,6 +8,14 @@ export class Hand {
     this.cards = cards
   }
 
+  get length() {
+    return this.cards.length
+  }
+
+  get count() {
+    return this.length
+  }
+
   addCard(card: Card) {
     this.cards.push(card)
   }
