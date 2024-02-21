@@ -1,5 +1,5 @@
-import { Hand } from './hand'
-import { Card, Suits, Ranks } from './card'
+import { Hand } from '@lib/hand'
+import { Card, Suits, Ranks } from '@lib/card'
 import shuffle from 'lodash/shuffle'
 import times from 'lodash/times'
 import random from 'lodash/random'

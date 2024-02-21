@@ -1,13 +1,18 @@
-import { FullDeck, EuchreDeck } from './deck'
+import { FullDeck, EuchreDeck } from '@lib/deck'
 
 const euchreDeck = new EuchreDeck()
 const fullDeck = new FullDeck()
 
-console.log('Random Card from a full deck:', `${fullDeck.takeRandomCard()}`)
+console.log(
+  'Three Random Cards from a full deck:',
+  `${fullDeck.takeRandomCard()}`,
+  `${fullDeck.takeRandomCard()}`,
+  `${fullDeck.takeRandomCard()}`,
+)
 
 console.log('\n\n============================\n')
 
-euchreDeck.shuffle(3)
+euchreDeck.shuffle(5)
 
 const hands = euchreDeck.dealHands({ cardsPerHand: 5, numberOfHands: 4 })
 
