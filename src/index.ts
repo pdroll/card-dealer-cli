@@ -1,7 +1,9 @@
 import { program, Option, Command } from 'commander'
 import { deckTypeNames } from '@lib/deck'
 import { pickACardHandler } from '@commands/pick-a-card'
+import { dealAHandHandler } from '@commands/deal-a-hand'
 import type { GlobalOpts, PickACardOpts, DealAHandOpts } from '@commands/types'
+import { gameTypes } from '@commands/types'
 
 const pickACard = new Command('pick-a-card')
   .description('Pick a random card or cards from a deck')
@@ -20,12 +22,6 @@ const pickACard = new Command('pick-a-card')
     'Should the card be pulled from the top of the deck, rather than at a random point in the deck?',
     false,
   )
-  .addOption(
-    new Option(
-      '--cut [Y/n]',
-      'Do you want to cut the deck after shuffling?',
-    ).argParser((a) => (a === 'n' ? false : true)),
-  )
   .action(async (options: PickACardOpts, command: Command) => {
     const opts = {
       ...command?.parent?.opts<GlobalOpts>(),
@@ -37,13 +33,18 @@ const pickACard = new Command('pick-a-card')
 
 const dealAHand = new Command('deal-a-hand')
   .description('Deal a hand for one of several types of card games')
-  .action((options: DealAHandOpts, command: Command) => {
+  .addOption(
+    new Option(
+      '-g, --game <game-type>',
+      'What card game should we deal a hand for?',
+    ).choices(gameTypes),
+  )
+  .action(async (options: DealAHandOpts, command: Command) => {
     const opts = {
       ...command?.parent?.opts<GlobalOpts>(),
       ...options,
     }
-
-    console.log('Dealing a hand', opts)
+    await dealAHandHandler(opts)
   })
 
 program
@@ -62,6 +63,12 @@ program
     )
       .default(7)
       .argParser(parseFloat),
+  )
+  .addOption(
+    new Option(
+      '--cut [Y/n]',
+      'Do you want to cut the deck after shuffling?',
+    ).argParser((a) => (a === 'n' ? false : true)),
   )
 
 program.parse()

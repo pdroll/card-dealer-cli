@@ -3,13 +3,24 @@ import type { DeckTypeName } from '@lib/deck'
 export interface GlobalOpts {
   perfectShuffle?: boolean
   shuffleTimes?: number
+  cut?: boolean
 }
 
 export interface PickACardOpts {
   deck: DeckTypeName
   count: number
   top: boolean
-  cut?: boolean
 }
 
-export interface DealAHandOpts {}
+export const gameTypes = [
+  'blackjack',
+  'poker',
+  'euchre',
+  'pinochle',
+  'canasta',
+] as const
+export type GameType = (typeof gameTypes)[number]
+
+export interface DealAHandOpts {
+  game?: GameType
+}

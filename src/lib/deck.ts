@@ -2,7 +2,7 @@ import { Card, Suits, Ranks } from '@lib/card'
 import { BaseDeck } from '@lib/base-deck'
 import times from 'lodash/times'
 
-export class FullDeck extends BaseDeck {
+export class StandardDeck extends BaseDeck {
   constructor() {
     super()
     Object.values(Suits).map((suit) => {
@@ -19,7 +19,7 @@ export class FullDeck extends BaseDeck {
   }
 }
 
-export class EuchreDeck extends FullDeck {
+export class EuchreDeck extends StandardDeck {
   constructor() {
     super()
     this.cards = this.cards.filter((card) => card.rank >= 9)
@@ -33,7 +33,7 @@ export class PinochleDeck extends EuchreDeck {
   }
 }
 
-export class CanastaDeck extends FullDeck {
+export class CanastaDeck extends StandardDeck {
   constructor() {
     super()
     this.cards = [...this.cards, ...this.cards]
@@ -42,7 +42,7 @@ export class CanastaDeck extends FullDeck {
 }
 
 export type DeckClass =
-  | typeof FullDeck
+  | typeof StandardDeck
   | typeof EuchreDeck
   | typeof CanastaDeck
   | typeof PinochleDeck
@@ -56,7 +56,7 @@ export const deckTypeNames = [
 export type DeckTypeName = (typeof deckTypeNames)[number]
 
 export const DeckClassMap: Record<DeckTypeName, DeckClass> = {
-  standard: FullDeck,
+  standard: StandardDeck,
   euchre: EuchreDeck,
   canasta: CanastaDeck,
   pinochle: PinochleDeck,
