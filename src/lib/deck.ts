@@ -26,6 +26,13 @@ export class EuchreDeck extends FullDeck {
   }
 }
 
+export class PinochleDeck extends EuchreDeck {
+  constructor() {
+    super()
+    this.cards = [...this.cards, ...this.cards]
+  }
+}
+
 export class CanastaDeck extends FullDeck {
   constructor() {
     super()
@@ -34,13 +41,23 @@ export class CanastaDeck extends FullDeck {
   }
 }
 
-export type DeckClass = typeof FullDeck | typeof EuchreDeck | typeof CanastaDeck
+export type DeckClass =
+  | typeof FullDeck
+  | typeof EuchreDeck
+  | typeof CanastaDeck
+  | typeof PinochleDeck
 
-export const deckTypeNames = ['standard', 'euchre', 'canasta'] as const
+export const deckTypeNames = [
+  'standard',
+  'euchre',
+  'canasta',
+  'pinochle',
+] as const
 export type DeckTypeName = (typeof deckTypeNames)[number]
 
 export const DeckClassMap: Record<DeckTypeName, DeckClass> = {
   standard: FullDeck,
   euchre: EuchreDeck,
   canasta: CanastaDeck,
+  pinochle: PinochleDeck,
 }
