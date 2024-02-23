@@ -20,7 +20,7 @@ export abstract class BaseDeck {
   }
 
   showCards() {
-    return [...this.cards].map((c) => c.toString())
+    return [...this.cards].map((c) => c.toString()).join(' | ')
   }
 
   private getAboutHalfOfTheCards(exacltyHalf = false) {

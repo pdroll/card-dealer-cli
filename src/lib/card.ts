@@ -1,8 +1,10 @@
+import chalk from 'chalk'
+
 export const Suits = {
-  CLUBS: '♧',
-  DIAMONDS: '♦',
   HEARTS: '♥',
-  SPADES: '♤',
+  CLUBS: '♣️',
+  DIAMONDS: '♦',
+  SPADES: '♠️',
 } as const
 export type Suit = (typeof Suits)[keyof typeof Suits]
 
@@ -39,7 +41,11 @@ export class Card {
       if (Ranks[rankName] === this.rank) return rankName
     })
 
-    if (this.rank === Ranks.JOKER) return 'Joker'
-    return `${this.suit} ${rankName}`
+    if (this.rank === Ranks.JOKER) return chalk.bold.italic('Joker')
+
+    const redSuits: Suit[] = [Suits.HEARTS, Suits.DIAMONDS]
+    const color = redSuits.includes(this.suit) ? chalk.red : chalk.whiteBright
+
+    return color.bold(`${this.suit} ${rankName}`)
   }
 }

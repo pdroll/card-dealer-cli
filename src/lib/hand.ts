@@ -21,8 +21,8 @@ export class Hand {
   }
 
   showCards() {
-    return orderBy([...this.cards], ['suit', 'rank'], 'asc').map((c) =>
-      c.toString(),
-    )
+    return orderBy([...this.cards], ['suit', 'rank'], 'asc')
+      .map((c) => c.toString())
+      .join('  ')
   }
 }

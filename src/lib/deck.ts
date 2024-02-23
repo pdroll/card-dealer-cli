@@ -33,3 +33,14 @@ export class CanastaDeck extends FullDeck {
     this.addJokers(4)
   }
 }
+
+export type DeckClass = typeof FullDeck | typeof EuchreDeck | typeof CanastaDeck
+
+export const deckTypeNames = ['standard', 'euchre', 'canasta'] as const
+export type DeckTypeName = (typeof deckTypeNames)[number]
+
+export const DeckClassMap: Record<DeckTypeName, DeckClass> = {
+  standard: FullDeck,
+  euchre: EuchreDeck,
+  canasta: CanastaDeck,
+}
