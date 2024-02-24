@@ -8,6 +8,8 @@ import {
 import prompts from 'prompts'
 import capitalize from 'lodash/capitalize'
 import chalk from 'chalk'
+import { shuffleAndCutDeck } from '@commands/shuffle-and-cut-deck'
+import { Rank, Ranks } from '@lib/card'
 
 interface DealAHandOptions extends DealAHandOpts, GlobalOpts {}
 
@@ -41,69 +43,107 @@ export const dealAHandHandler = async (opts: DealAHandOptions) => {
   }
 }
 
-const shuffleAndCutDeck = async (
-  deck: StandardDeck,
-  opts: DealAHandOptions,
-) => {
-  if (opts.shuffleTimes) {
-    console.log(
-      chalk.italic(
-        `\nShuffling the deck ${opts.shuffleTimes} time${opts.shuffleTimes > 1 ? 's' : ''}...\n`,
-      ),
-    )
-    deck.riffleShuffle(opts.shuffleTimes, opts.perfectShuffle)
-  }
+const promptPlayers = async (): Promise<number> => {
+  const { players }: { players: number } = await prompts({
+    type: 'number',
+    name: 'players',
+    message: 'How many players?',
+  })
 
-  let cutTheDeck: boolean | undefined = opts.cut
-  if (opts.cut === undefined) {
-    const answer = await prompts({
-      type: 'confirm',
-      name: 'cutTheDeck',
-      message: 'Do you want to cut the deck?',
-    })
-
-    cutTheDeck = answer.cutTheDeck
-  }
-
-  if (cutTheDeck) {
-    deck.cut()
-    console.log(chalk.italic(`Cutting the deck...\n`))
-  }
-
-  return deck
+  return players
 }
 
 const dealBlackjack = async (opts: DealAHandOptions) => {
-  const deck = new StandardDeck()
+  const deck = await shuffleAndCutDeck(new StandardDeck(), opts)
+  const players = await promptPlayers()
+  const hands = deck.dealHands({ cardsPerHand: 2, numberOfHands: players + 1 })
 
-  await shuffleAndCutDeck(deck, opts)
-  console.log('Deal Blackjack!', deck.showCards())
+  hands.map((hand, ix) => {
+    const handName = ix >= players ? 'Dealer' : `Player ${ix + 1}`
+    console.log(chalk.bold.underline(`\n${handName}`))
+    console.log(hand.showCards())
+  })
 }
 
 const dealPoker = async (opts: DealAHandOptions) => {
-  const deck = new StandardDeck()
-  await shuffleAndCutDeck(deck, opts)
+  const deck = await shuffleAndCutDeck(new StandardDeck(), opts)
+  const players = await promptPlayers()
+  const hands = deck.dealHands({ cardsPerHand: 2, numberOfHands: players })
 
-  console.log('Deal Poker!', deck.showCards())
+  hands.map((hand, ix) => {
+    console.log(chalk.bold.underline(`\nPlayer ${ix + 1}`))
+    console.log(hand.showCards())
+  })
+
+  deck.takeCard() // Burn card
+  const flop = deck.takeCards(3)
+
+  deck.takeCard() // Burn card
+  const turn = deck.takeCard()
+
+  deck.takeCard() // Burn card
+  const river = deck.takeCard()
+
+  console.log(chalk.italic.underline('\nBoard'))
+  console.log([...flop, turn, river].join('  '))
 }
 
 const dealEuchre = async (opts: DealAHandOptions) => {
-  const deck = new EuchreDeck()
-  await shuffleAndCutDeck(deck, opts)
+  const deck = await shuffleAndCutDeck(new EuchreDeck(), opts)
+  const hands = deck.dealHands({ cardsPerHand: 5, numberOfHands: 4 })
 
-  console.log('Deal Euchre!', deck.showCards())
+  console.log(chalk.bold.underline(`\nTeam A`))
+  console.log(`Player 1:  ${hands[0].showCards()}`)
+  console.log(`Player 3:  ${hands[2].showCards()}`)
+
+  console.log(chalk.bold.underline(`\nTeam B`))
+  console.log(`Player 2:  ${hands[1].showCards()}`)
+  console.log(`Dealer:    ${hands[3].showCards()}`)
+
+  const turnUp = deck.takeCard()
+  console.log(chalk.underline(`\nTurn Up`))
+  console.log(`${turnUp}`)
 }
 
 const dealPinochle = async (opts: DealAHandOptions) => {
-  const deck = new PinochleDeck()
-  await shuffleAndCutDeck(deck, opts)
+  const deck = await shuffleAndCutDeck(new PinochleDeck(), opts)
+  const hands = deck.dealHands({ numberOfHands: 2, cardsPerHand: 12 })
 
-  console.log('Deal Pinochle!', deck.showCards())
+  console.log(chalk.bold.underline(`\nPlayer 1`))
+  console.log(hands[0].showCards())
+
+  console.log(chalk.bold.underline(`\nPlayer 2`))
+  console.log(hands[1].showCards())
+
+  const turnUp = deck.takeCard()
+  console.log(chalk.underline(`\nTurn Up`))
+  console.log(`${turnUp}`)
 }
 
 const dealCanasta = async (opts: DealAHandOptions) => {
-  const deck = new CanastaDeck()
-  await shuffleAndCutDeck(deck, opts)
+  const deck = await shuffleAndCutDeck(new CanastaDeck(), opts)
+  const hands = deck.dealHands({ numberOfHands: 4, cardsPerHand: 11 })
 
-  console.log('Deal Canasta!', deck.showCards())
+  console.log(chalk.bold.underline(`\nTeam A`))
+  console.log(`Player 1:  ${hands[0].showCards()}`)
+  console.log(`Player 3:  ${hands[2].showCards()}`)
+
+  console.log(chalk.bold.underline(`\nTeam B`))
+  console.log(`Player 2:  ${hands[1].showCards()}`)
+  console.log(`Dealer:    ${hands[3].showCards()}`)
+
+  console.log(chalk.underline(`\nTurn Up`))
+  const invalidTurnUpRanks: Rank[] = [Ranks.JOKER, Ranks['2'], Ranks['3']]
+  let validTurnUp = false
+  do {
+    const turnUp = deck.takeCard()
+
+    if (turnUp && invalidTurnUpRanks.includes(turnUp?.rank)) {
+      console.log(chalk.strikethrough(`${turnUp}`))
+      validTurnUp = false
+    } else {
+      validTurnUp = true
+      console.log(`${turnUp}`)
+    }
+  } while (!validTurnUp)
 }

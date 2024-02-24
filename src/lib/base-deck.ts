@@ -75,6 +75,17 @@ export abstract class BaseDeck {
     return this.cards.pop() ?? null
   }
 
+  takeCards(numberOfCards): Card[] {
+    const cards: Card[] = []
+
+    times(numberOfCards, () => {
+      const card = this.takeCard()
+      if (card) cards.push(card)
+    })
+
+    return cards
+  }
+
   takeRandomCard(): Card | null {
     const cardIndex = random(this.length - 1)
     return this.cards.splice(cardIndex, 1)[0]

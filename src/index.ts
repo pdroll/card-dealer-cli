@@ -29,6 +29,7 @@ const pickACard = new Command('pick-a-card')
     }
 
     await pickACardHandler(opts)
+    console.log('\n')
   })
 
 const dealAHand = new Command('deal-a-hand')
@@ -45,6 +46,8 @@ const dealAHand = new Command('deal-a-hand')
       ...options,
     }
     await dealAHandHandler(opts)
+
+    console.log('\n')
   })
 
 program

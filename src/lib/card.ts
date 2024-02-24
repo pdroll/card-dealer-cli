@@ -1,4 +1,5 @@
 import chalk from 'chalk'
+import pad from 'lodash/pad'
 
 export const Suits = {
   HEARTS: '♥',
@@ -46,6 +47,6 @@ export class Card {
     const redSuits: Suit[] = [Suits.HEARTS, Suits.DIAMONDS]
     const color = redSuits.includes(this.suit) ? chalk.red : chalk.whiteBright
 
-    return color.bold(`${this.suit} ${rankName}`)
+    return color.bold(`${this.suit} ${pad(rankName, 2)}`)
   }
 }
