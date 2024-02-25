@@ -1,4 +1,4 @@
-import { Card, Suits, Ranks } from '@lib/card'
+import { Card, Ranks, Suits } from '@lib/card'
 import { BaseDeck } from '@lib/base-deck'
 import times from 'lodash/times'
 

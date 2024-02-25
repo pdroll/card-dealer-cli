@@ -1,8 +1,8 @@
-import { Hand } from '@lib/hand'
 import { Card } from '@lib/card'
+import { Hand } from '@lib/hand'
+import random from 'lodash/random'
 import shuffle from 'lodash/shuffle'
 import times from 'lodash/times'
-import random from 'lodash/random'
 
 export abstract class BaseDeck {
   protected cards: Card[]
@@ -103,7 +103,7 @@ export abstract class BaseDeck {
       .map(() => new Hand([]))
 
     times(cardsPerHand, () => {
-      hands.forEach((hand, ix) => {
+      hands.forEach((hand) => {
         const card = this.takeCard()
         if (card) hand.addCard(card)
       })

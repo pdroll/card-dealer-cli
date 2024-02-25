@@ -1,15 +1,16 @@
-import { StandardDeck, EuchreDeck, CanastaDeck, PinochleDeck } from '@lib/deck'
+import { CanastaDeck, EuchreDeck, PinochleDeck, StandardDeck } from '@lib/deck'
 import {
-  type GlobalOpts,
   type DealAHandOpts,
-  gameTypes,
   GameType,
+  type GlobalOpts,
+  gameTypes,
 } from '@commands/types'
-import prompts from 'prompts'
+import { Rank, Ranks } from '@lib/card'
+
 import capitalize from 'lodash/capitalize'
 import chalk from 'chalk'
+import prompts from 'prompts'
 import { shuffleAndCutDeck } from '@commands/shuffle-and-cut-deck'
-import { Rank, Ranks } from '@lib/card'
 
 interface DealAHandOptions extends DealAHandOpts, GlobalOpts {}
 

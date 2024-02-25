@@ -1,7 +1,7 @@
-import { StandardDeck } from '@lib/deck'
 import { type GlobalOpts } from '@commands/types'
-import prompts from 'prompts'
+import { StandardDeck } from '@lib/deck'
 import chalk from 'chalk'
+import prompts from 'prompts'
 
 export const shuffleAndCutDeck = async (
   deck: StandardDeck,
