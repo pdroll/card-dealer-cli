@@ -75,7 +75,7 @@ export abstract class BaseDeck {
     return this.cards.pop() ?? null
   }
 
-  takeCards(numberOfCards): Card[] {
+  takeCards(numberOfCards: number): Card[] {
     const cards: Card[] = []
 
     times(numberOfCards, () => {
@@ -97,7 +97,7 @@ export abstract class BaseDeck {
   }: {
     cardsPerHand?: number
     numberOfHands?: number
-  }): Hand[] {
+  } = {}): Hand[] {
     const hands = Array(numberOfHands)
       .fill(0)
       .map(() => new Hand([]))

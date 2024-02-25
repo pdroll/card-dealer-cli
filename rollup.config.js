@@ -1,13 +1,13 @@
-import typescript from '@rollup/plugin-typescript'
-import nodeResolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
-import terser from '@rollup/plugin-terser'
 import executable from 'rollup-plugin-executable'
+import nodeResolve from '@rollup/plugin-node-resolve'
+import terser from '@rollup/plugin-terser'
+import typescript from '@rollup/plugin-typescript'
 
 const plugins = [
   commonjs(),
   nodeResolve({ exportConditions: ['node'] }),
-  typescript({ tsconfig: './tsconfig.json' }),
+  typescript({ tsconfig: './tsconfig.json', outputToFilesystem: true }),
   terser({ keep_classnames: true }),
 ]
 
@@ -27,7 +27,13 @@ export default [
     output: [
       {
         file: 'build/index.js',
+        format: 'cjs',
+        sourcemap: true,
+      },
+      {
+        file: 'build/index.mjs',
         format: 'es',
+        sourcemap: true,
       },
     ],
     plugins,

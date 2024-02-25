@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 import { Command, Option, program } from 'commander'
 import type { DealAHandOpts, GlobalOpts, PickACardOpts } from '@commands/types'
 import { dealAHandHandler } from '@commands/deal-a-hand'
