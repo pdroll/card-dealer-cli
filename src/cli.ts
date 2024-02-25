@@ -53,7 +53,7 @@ const dealAHand = new Command('deal-a-hand')
   })
 
 program
-  .name('deck-of-cards')
+  .name('card-dealer')
   .addCommand(pickACard, { isDefault: true })
   .addCommand(dealAHand)
   .option(

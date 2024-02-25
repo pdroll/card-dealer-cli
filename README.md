@@ -13,7 +13,7 @@ npm install -g card-dealer-cli
 There are two commands available: `pick-a-card` and `deal-a-hand`
 
 ```sh
-Usage: deck-of-cards [options] [command]
+Usage: card-dealer [options] [command]
 
 Options:
   -p, --perfect-shuffle        Should all randomness be removed when shuffling the deck? (default:
@@ -37,7 +37,7 @@ Pick a random card (or multiple cards) from a deck of cards.
 (_This is the default command, so it will run if you don't specify another command_)
 
 ```sh
-Usage: deck-of-cards pick-a-card [options]
+Usage: card-dealer pick-a-card [options]
 
 Pick a random card or cards from a deck
 
@@ -53,25 +53,25 @@ Options:
 Pick a random card from a standard 52 card deck:
 
 ```sh
-deck-of-cards
+card-dealer
 ```
 
 Cut the deck after shuffling without being prompted
 
 ```sh
-deck-of-cards pick-a-card --cut
+card-dealer pick-a-card --cut
 ```
 
 Do not shuffle or cut the deck and pick a card off the top of the deck. (This will not be random at all).
 
 ```sh
-deck-of-cards pick-a-card --shuffle-times 0 --cut n --top
+card-dealer pick-a-card --shuffle-times 0 --cut n --top
 ```
 
 Pick two random cards from a canata deck:
 
 ```sh
-deck-of-cards pick-a-card --deck canasta --count 2
+card-dealer pick-a-card --deck canasta --count 2
 ```
 
 ### `deal-a-hand`
@@ -81,7 +81,7 @@ Deal the initial hand for several types of cards games: blackjack, poker, euchre
 ![deal-a-hand cli in use](./deal-a-hand.gif)
 
 ```sh
-Usage: deck-of-cards deal-a-hand [options]
+Usage: card-dealer deal-a-hand [options]
 
 Deal a hand for one of several types of card games
 
@@ -95,19 +95,19 @@ Options:
 Deal hand, being prompted for what game
 
 ```sh
-deck-of-cards deal-a-hand
+card-dealer deal-a-hand
 ```
 
 Deal a game of Texas hold 'em poker
 
 ```sh
-deck-of-cards deal-a-hand --game poker
+card-dealer deal-a-hand --game poker
 ```
 
 Deal a game Euchre without shuffling, only cutting the deck once
 
 ```sh
-deck-of-cards deal-a-hand --game euchre --shuffle-times 0 --cut
+card-dealer deal-a-hand --game euchre --shuffle-times 0 --cut
 ```
 
 ## Importing libs
