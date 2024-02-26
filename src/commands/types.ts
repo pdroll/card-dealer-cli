@@ -1,4 +1,4 @@
-import type { DeckTypeName } from '@lib/deck'
+import type { DeckTypeName } from '../lib/deck'
 
 export interface GlobalOpts {
   perfectShuffle?: boolean

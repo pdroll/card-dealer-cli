@@ -1,11 +1,13 @@
 #!/usr/bin/env node
 
 import { Command, Option, program } from 'commander'
-import type { DealAHandOpts, GlobalOpts, PickACardOpts } from '@commands/types'
-import { dealAHandHandler } from '@commands/deal-a-hand'
-import { deckTypeNames } from '@lib/deck'
-import { gameTypes } from '@commands/types'
-import { pickACardHandler } from '@commands/pick-a-card'
+import type { DealAHandOpts, GlobalOpts, PickACardOpts } from './commands/types'
+import { dealAHandHandler } from './commands/deal-a-hand'
+import { deckTypeNames } from './lib/deck'
+import { gameTypes } from './commands/types'
+import { pickACardHandler } from './commands/pick-a-card'
+
+const VERSION = '1.0.2' as const
 
 const pickACard = new Command('pick-a-card')
   .description('Pick a random card or cards from a deck')
@@ -54,6 +56,7 @@ const dealAHand = new Command('deal-a-hand')
 
 program
   .name('card-dealer')
+  .version(VERSION)
   .addCommand(pickACard, { isDefault: true })
   .addCommand(dealAHand)
   .option(

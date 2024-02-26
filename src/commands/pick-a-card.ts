@@ -1,8 +1,8 @@
-import type { GlobalOpts, PickACardOpts } from '@commands/types'
-import { Card } from '@lib/card'
-import { DeckClassMap } from '@lib/deck'
+import type { GlobalOpts, PickACardOpts } from './types'
+import { Card } from '../lib/card'
+import { DeckClassMap } from '../lib/deck'
 import chalk from 'chalk'
-import { shuffleAndCutDeck } from '@commands/shuffle-and-cut-deck'
+import { shuffleAndCutDeck } from './shuffle-and-cut-deck'
 import times from 'lodash/times'
 
 interface PickACardOptions extends PickACardOpts, GlobalOpts {}

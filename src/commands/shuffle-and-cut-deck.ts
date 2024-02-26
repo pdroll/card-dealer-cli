@@ -1,5 +1,5 @@
-import { type GlobalOpts } from '@commands/types'
-import { StandardDeck } from '@lib/deck'
+import { type GlobalOpts } from './types'
+import { StandardDeck } from '../lib/deck'
 import chalk from 'chalk'
 import prompts from 'prompts'
 

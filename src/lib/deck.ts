@@ -1,5 +1,5 @@
-import { Card, Ranks, Suits } from '@lib/card'
-import { BaseDeck } from '@lib/base-deck'
+import { Card, Ranks, Suits } from './card'
+import { BaseDeck } from './base-deck'
 import times from 'lodash/times'
 
 export class StandardDeck extends BaseDeck {

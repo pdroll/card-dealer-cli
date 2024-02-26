@@ -1,4 +1,4 @@
-import { Card } from '@lib/card'
+import { Card } from './card'
 import orderBy from 'lodash/orderBy'
 
 export class Hand {

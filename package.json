@@ -1,6 +1,6 @@
 {
   "name": "card-dealer-cli",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "CLI utility for interacting with a deck of cards: pick a random card or deal a hand for a card game",
   "keywords": [
     "cards",
@@ -16,12 +16,17 @@
   ],
   "main": "build/index.js",
   "module": "build/index.mjs",
+  "types": "build/index.d.ts",
+  "files": [
+    "build"
+  ],
   "bin": {
     "card-dealer": "./build/cli.js"
   },
   "scripts": {
     "prepare": "npm run compile",
     "compile": "rollup -c --bundleConfigAsCjs",
+    "clean": "rm -rf build .rollup.cache",
     "compile:watch": "rollup -cw --bundleConfigAsCjs",
     "start": "./build/cli.js",
     "card-dealer": "card-dealer",
