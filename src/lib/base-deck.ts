@@ -19,8 +19,14 @@ export abstract class BaseDeck {
     return this.length
   }
 
+  getCards() {
+    return [...this.cards]
+  }
+
   showCards() {
-    return [...this.cards].map((c) => c.toString()).join(' | ')
+    return this.getCards()
+      .map((c) => c.toString())
+      .join(' | ')
   }
 
   private getAboutHalfOfTheCards(exacltyHalf = false) {
@@ -87,7 +93,7 @@ export abstract class BaseDeck {
   }
 
   takeRandomCard(): Card | null {
-    const cardIndex = random(this.length - 1)
+    const cardIndex = random(this.length - 2)
     return this.cards.splice(cardIndex, 1)[0]
   }
 

@@ -20,6 +20,6 @@
     "declaration": true,
     "outDir": "build"
   },
-  "include": ["**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "include": ["**/*.ts", "**/*.tsx", "jest.config.ts"],
+  "exclude": ["node_modules", "jest.config.ts"]
 }
