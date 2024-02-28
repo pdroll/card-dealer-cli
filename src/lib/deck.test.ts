@@ -1,6 +1,7 @@
-import { CanastaDeck, EuchreDeck, PinochleDeck, StandardDeck } from './deck'
-import { Ranks } from './card'
 import uniqBy from 'lodash/uniqBy'
+
+import { Ranks } from './card'
+import { CanastaDeck, EuchreDeck, PinochleDeck, StandardDeck } from './deck'
 
 describe('StandardDeck', () => {
   it('has 52 cards with 4 suits and 13 ranks', () => {

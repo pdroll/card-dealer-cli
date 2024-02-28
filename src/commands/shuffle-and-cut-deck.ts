@@ -1,12 +1,13 @@
-import { type GlobalOpts } from './types'
-import { StandardDeck } from '../lib/deck'
 import chalk from 'chalk'
 import prompts from 'prompts'
 
-export const shuffleAndCutDeck = async (
-  deck: StandardDeck,
+import { StandardDeck } from '../lib/deck'
+import { type GlobalOpts } from './types'
+
+export const shuffleAndCutDeck = async <D extends StandardDeck>(
+  deck: D,
   opts: GlobalOpts,
-) => {
+): Promise<D> => {
   if (opts.shuffleTimes) {
     console.log(
       chalk.italic(

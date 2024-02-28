@@ -1,6 +1,7 @@
-import { Card, Ranks, Suits } from './card'
-import { BaseDeck } from './base-deck'
 import times from 'lodash/times'
+
+import { BaseDeck } from './base-deck'
+import { Card, Ranks, Suits } from './card'
 
 export class StandardDeck extends BaseDeck {
   constructor() {

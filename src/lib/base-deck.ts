@@ -1,8 +1,9 @@
-import { Card } from './card'
-import { Hand } from './hand'
 import random from 'lodash/random'
 import shuffle from 'lodash/shuffle'
 import times from 'lodash/times'
+
+import { Card } from './card'
+import { Hand } from './hand'
 
 export abstract class BaseDeck {
   protected cards: Card[]
@@ -68,13 +69,15 @@ export abstract class BaseDeck {
 
       this.cards = shuffledCards
     })
+
+    return this
   }
 
   randomizedShuffle(numberOfShuffles = 1) {
     times(numberOfShuffles, () => {
       this.cards = shuffle(this.cards)
     })
-    return this.showCards()
+    return this
   }
 
   takeCard(): Card | null {

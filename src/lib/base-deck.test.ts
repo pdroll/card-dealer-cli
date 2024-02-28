@@ -64,7 +64,7 @@ describe('BaseDeck', () => {
       const workingDeck = new StandardDeck()
       const card = workingDeck.takeCard()
 
-      expect(deck.length - 1).toBe(workingDeck.length)
+      expect(workingDeck.length).toBe(deck.length - 1)
       expect(deck.getCards()[deck.count - 1]).toEqual(card)
       expect(workingDeck.getCards()[workingDeck.count - 1]).not.toEqual(card)
     })
@@ -86,7 +86,7 @@ describe('BaseDeck', () => {
       const workingDeck = new StandardDeck()
       const card = workingDeck.takeCards(3)
 
-      expect(deck.length - 3).toBe(workingDeck.length)
+      expect(workingDeck.length).toBe(deck.length - 3)
       expect(deck.getCards()[deck.count - 1]).toEqual(card[0])
       expect(deck.getCards()[deck.count - 2]).toEqual(card[1])
       expect(deck.getCards()[deck.count - 3]).toEqual(card[2])
@@ -99,7 +99,7 @@ describe('BaseDeck', () => {
       const workingDeck = new StandardDeck()
       const card = workingDeck.takeRandomCard()
 
-      expect(deck.length - 1).toBe(workingDeck.length)
+      expect(workingDeck.length).toBe(deck.length - 1)
       expect(deck.getCards()[deck.count - 1]).not.toEqual(card)
     })
   })
