@@ -1,7 +1,13 @@
 import uniqBy from 'lodash/uniqBy'
 
 import { Ranks } from './card'
-import { CanastaDeck, EuchreDeck, PinochleDeck, StandardDeck } from './deck'
+import {
+  CanastaDeck,
+  DoubleStandardDeck,
+  EuchreDeck,
+  PinochleDeck,
+  StandardDeck,
+} from './deck'
 
 describe('StandardDeck', () => {
   it('has 52 cards with 4 suits and 13 ranks', () => {
@@ -17,6 +23,27 @@ describe('StandardDeck', () => {
 
   it('has no jokers', () => {
     const deck = new StandardDeck()
+
+    deck.getCards().forEach((card) => {
+      expect(card.rank).not.toBe(Ranks.JOKER)
+    })
+  })
+})
+
+describe('DoubleStandardDeck', () => {
+  it('has 104 cards with 4 suits and 13 ranks', () => {
+    const deck = new DoubleStandardDeck()
+    expect(deck.count).toBe(104)
+
+    const ranks = uniqBy(deck.getCards(), (c) => c.rank)
+    expect(ranks.length).toBe(13)
+
+    const suits = uniqBy(deck.getCards(), (c) => c.suit)
+    expect(suits.length).toBe(4)
+  })
+
+  it('has no jokers', () => {
+    const deck = new DoubleStandardDeck()
 
     deck.getCards().forEach((card) => {
       expect(card.rank).not.toBe(Ranks.JOKER)

@@ -19,6 +19,7 @@ export const gameTypes = [
   'pinochle',
   'canasta',
   'gin',
+  'rummy',
 ] as const
 export type GameType = (typeof gameTypes)[number]
 

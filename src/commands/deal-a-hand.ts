@@ -8,14 +8,16 @@ import { EuchreDealer } from '../dealers/euchre-dealer'
 import { GinDealer } from '../dealers/gin-dealer'
 import { PinochleDealer } from '../dealers/pinochle-dealer'
 import { PokerDealer } from '../dealers/poker-dealer'
+import { RummyDealer } from '../dealers/rummy-dealer'
 import {
   CanastaDeck,
+  DoubleStandardDeck,
   EuchreDeck,
   PinochleDeck,
   StandardDeck,
 } from '../lib/deck'
 import { numberToLetter } from '../lib/utils'
-import { shuffleAndCutDeck } from './shuffle-and-cut-deck'
+import { shuffleAndCutDeck, shuffleAndCutDecks } from './shuffle-and-cut-deck'
 import {
   type DealAHandOpts,
   GameType,
@@ -51,6 +53,8 @@ export const dealAHandHandler = async (opts: DealAHandOptions) => {
       return dealCanasta(opts)
     case 'gin':
       return dealGin(opts)
+    case 'rummy':
+      return dealRummy(opts)
     default:
       console.error(chalk.bold.red('You must choose a card game!'))
       return
@@ -147,6 +151,24 @@ const dealGin = async (opts: DealAHandOptions) => {
   const deck = await shuffleAndCutDeck(new StandardDeck(), opts)
   const dealer = new GinDealer(deck)
   const { playerHands, turnUp } = dealer.deal()
+
+  playerHands.map((hand) => {
+    console.log(`\n${chalk.bold.underline(hand.name)}`)
+    console.log(hand.showCards())
+  })
+
+  console.log(chalk.underline(`\nTurn Up`))
+  console.log(`${turnUp}`)
+}
+
+const dealRummy = async (opts: DealAHandOptions) => {
+  console.log(chalk.bold.underline('\nDealing Rummy\n'))
+  const deck = new StandardDeck()
+  const doubleDeck = new DoubleStandardDeck()
+  await shuffleAndCutDecks([deck, doubleDeck], opts)
+
+  const dealer = new RummyDealer(deck, doubleDeck)
+  const { playerHands, turnUp } = dealer.deal(await promptPlayers())
 
   playerHands.map((hand) => {
     console.log(`\n${chalk.bold.underline(hand.name)}`)
