@@ -1,6 +1,7 @@
 export { BlackjackDealer } from './dealers/blackjack-dealer'
 export { CanastaDealer } from './dealers/canasta-dealer'
 export { EuchreDealer } from './dealers/euchre-dealer'
+export { GinDealer } from './dealers/gin-dealer'
 export { PinochleDealer } from './dealers/pinochle-dealer'
 export { PokerDealer } from './dealers/poker-dealer'
 export type { Rank, Suit } from './lib/card'

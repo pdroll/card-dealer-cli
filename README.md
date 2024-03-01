@@ -1,6 +1,6 @@
 # Card Dealer CLI
 
-CLI utility for interacting with a deck of cards. You can draw a random card or cards from various types of decks (standard, euchre, pinochle, or canasta). You can also deal a hand for several card games: blackjack, poker, euchre, pinochle, or canasta.
+CLI utility for interacting with a deck of cards. You can draw a random card or cards from various types of decks (standard, euchre, pinochle, or canasta). You can also deal a hand for several card games: blackjack, poker, euchre, pinochle, canasta, or gin.
 
 ## Installation
 
@@ -76,7 +76,7 @@ card-dealer pick-a-card --deck canasta --count 2
 
 ### `deal-a-hand`
 
-Deal the initial hand for several types of cards games: blackjack, poker, euchre, pinochle, or canasta.
+Deal the initial hand for several types of cards games: blackjack, poker, euchre, pinochle, canasta, or gin.
 
 ![deal-a-hand cli in use](./deal-a-hand.gif)
 
@@ -86,7 +86,7 @@ Usage: card-dealer deal-a-hand [options]
 Deal a hand for one of several types of card games
 
 Options:
-  -g, --game <game-type>  What card game should we deal a hand for? (choices: "blackjack", "poker", "euchre", "pinochle", "canasta")
+  -g, --game <game-type>  What card game should we deal a hand for? (choices: "blackjack", "poker", "euchre", "pinochle", "canasta", "gin")
   -h, --help              display help for command
 ```
 

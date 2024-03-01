@@ -12,7 +12,8 @@
     "texas hold em",
     "euchre",
     "pinochle",
-    "canasta"
+    "canasta",
+    "gin"
   ],
   "main": "build/index.js",
   "module": "build/index.mjs",
@@ -25,11 +26,11 @@
   },
   "scripts": {
     "prepare": "npm run compile",
-    "compile": "rollup -c --bundleConfigAsCjs",
+    "card-dealer": "card-dealer",
     "clean": "rm -rf build .rollup.cache",
+    "compile": "rollup -c --bundleConfigAsCjs",
     "compile:watch": "rollup -cw --bundleConfigAsCjs",
     "start": "./build/cli.js",
-    "card-dealer": "card-dealer",
     "type-check": "tsc --noEmit",
     "format": "prettier . --check",
     "lint": "eslint src",

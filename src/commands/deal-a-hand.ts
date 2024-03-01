@@ -5,6 +5,7 @@ import prompts from 'prompts'
 import { BlackjackDealer } from '../dealers/blackjack-dealer'
 import { CanastaDealer } from '../dealers/canasta-dealer'
 import { EuchreDealer } from '../dealers/euchre-dealer'
+import { GinDealer } from '../dealers/gin-dealer'
 import { PinochleDealer } from '../dealers/pinochle-dealer'
 import { PokerDealer } from '../dealers/poker-dealer'
 import {
@@ -48,6 +49,8 @@ export const dealAHandHandler = async (opts: DealAHandOptions) => {
       return dealPinochle(opts)
     case 'canasta':
       return dealCanasta(opts)
+    case 'gin':
+      return dealGin(opts)
     default:
       console.error(chalk.bold.red('You must choose a card game!'))
       return
@@ -65,6 +68,7 @@ const promptPlayers = async (): Promise<number> => {
 }
 
 const dealBlackjack = async (opts: DealAHandOptions) => {
+  console.log(chalk.bold.underline('\nDealing Blackjack\n'))
   const deck = await shuffleAndCutDeck(new StandardDeck(), opts)
   const blackjackDealer = new BlackjackDealer(deck)
   const { playerHands, dealerHand } = blackjackDealer.deal(
@@ -79,6 +83,7 @@ const dealBlackjack = async (opts: DealAHandOptions) => {
 }
 
 const dealPoker = async (opts: DealAHandOptions) => {
+  console.log(chalk.bold.underline("\nDealing Texas Hold'em poker\n"))
   const deck = await shuffleAndCutDeck(new StandardDeck(), opts)
   const dealer = new PokerDealer(deck)
   const { playerHands, boardCards } = dealer.deal(await promptPlayers())
@@ -93,6 +98,7 @@ const dealPoker = async (opts: DealAHandOptions) => {
 }
 
 const dealEuchre = async (opts: DealAHandOptions) => {
+  console.log(chalk.bold.underline('\nDealing Euchre\n'))
   const deck = await shuffleAndCutDeck(new EuchreDeck(), opts)
   const dealer = new EuchreDealer(deck)
   const { teams, turnUp } = dealer.deal()
@@ -107,6 +113,7 @@ const dealEuchre = async (opts: DealAHandOptions) => {
 }
 
 const dealPinochle = async (opts: DealAHandOptions) => {
+  console.log(chalk.bold.underline('\nDealing Pinochle\n'))
   const deck = await shuffleAndCutDeck(new PinochleDeck(), opts)
   const dealer = new PinochleDealer(deck)
   const { playerHands, turnUp } = dealer.deal()
@@ -121,6 +128,7 @@ const dealPinochle = async (opts: DealAHandOptions) => {
 }
 
 const dealCanasta = async (opts: DealAHandOptions) => {
+  console.log(chalk.bold.underline('\nDealing Canasta\n'))
   const deck = await shuffleAndCutDeck(new CanastaDeck(), opts)
   const dealer = new CanastaDealer(deck)
   const { teams, turnUp } = dealer.deal()
@@ -128,6 +136,21 @@ const dealCanasta = async (opts: DealAHandOptions) => {
   teams.map((hands, ix) => {
     console.log(chalk.bold.underline(`\nTeam ${numberToLetter(ix + 1)}`))
     hands.map((hand) => console.log(`${hand.name}:  ${hand.showCards()}`))
+  })
+
+  console.log(chalk.underline(`\nTurn Up`))
+  console.log(`${turnUp}`)
+}
+
+const dealGin = async (opts: DealAHandOptions) => {
+  console.log(chalk.bold.underline('\nDealing Gin Rummy\n'))
+  const deck = await shuffleAndCutDeck(new StandardDeck(), opts)
+  const dealer = new GinDealer(deck)
+  const { playerHands, turnUp } = dealer.deal()
+
+  playerHands.map((hand) => {
+    console.log(`\n${chalk.bold.underline(hand.name)}`)
+    console.log(hand.showCards())
   })
 
   console.log(chalk.underline(`\nTurn Up`))
