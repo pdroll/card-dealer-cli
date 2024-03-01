@@ -29,8 +29,8 @@ export const Ranks = {
 export type Rank = (typeof Ranks)[keyof typeof Ranks]
 
 export class Card {
-  public suit: Suit
-  public rank: Rank
+  public readonly suit: Suit
+  public readonly rank: Rank
 
   constructor({ suit, rank }: { suit: Suit; rank: Rank }) {
     this.suit = suit

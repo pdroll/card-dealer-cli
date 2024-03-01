@@ -33,7 +33,10 @@
     "type-check": "tsc --noEmit",
     "format": "prettier . --check",
     "lint": "eslint src",
-    "lint:fix": "eslint src --fix"
+    "lint:fix": "eslint src --fix",
+    "test": "jest src/",
+    "test:watch": "jest src/ --watch",
+    "all-checks": "npm run type-check && npm run lint && npm run format && npm run test"
   },
   "author": "Pete Droll <droll.p@gmail.com>",
   "repository": {
@@ -46,18 +49,23 @@
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^11.1.6",
+    "@types/jest": "^29.5.12",
     "@types/lodash": "^4.14.202",
     "@typescript-eslint/eslint-plugin": "^7.0.2",
     "@typescript-eslint/parser": "^7.0.2",
     "eslint": "^8.57.0",
+    "eslint-plugin-simple-import-sort": "^12.0.0",
+    "jest": "^29.7.0",
     "prettier": "3.2.5",
     "rollup": "^4.12.0",
     "rollup-plugin-executable": "^1.6.3",
+    "ts-jest": "^29.1.2",
+    "ts-node": "^10.9.2",
     "tslib": "^2.6.2",
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "chalk": "^5.3.0",
+    "chalk": "^4.1.2",
     "commander": "^12.0.0",
     "lodash": "^4.17.21",
     "prompts": "^2.4.2"

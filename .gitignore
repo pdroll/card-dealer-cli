@@ -3,3 +3,4 @@ build
 .rollup.*
 .DS_Store
 tsconfig.tsbuildinfo
+coverage/*

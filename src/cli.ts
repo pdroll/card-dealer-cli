@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 
 import { Command, Option, program } from 'commander'
-import type { DealAHandOpts, GlobalOpts, PickACardOpts } from './commands/types'
+
 import { dealAHandHandler } from './commands/deal-a-hand'
-import { deckTypeNames } from './lib/deck'
-import { gameTypes } from './commands/types'
 import { pickACardHandler } from './commands/pick-a-card'
+import type { DealAHandOpts, GlobalOpts, PickACardOpts } from './commands/types'
+import { gameTypes } from './commands/types'
+import { deckTypeNames } from './lib/deck'
 
 const VERSION = '1.0.2' as const
 

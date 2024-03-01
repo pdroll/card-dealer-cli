@@ -1,8 +1,10 @@
-import { Card } from './card'
 import orderBy from 'lodash/orderBy'
+
+import { Card } from './card'
 
 export class Hand {
   private cards: Card[]
+  public name: string
 
   constructor(cards: Card[]) {
     this.cards = cards
@@ -16,8 +18,13 @@ export class Hand {
     return this.length
   }
 
-  addCard(card: Card) {
-    this.cards.push(card)
+  setName(name: string) {
+    this.name = name
+    return this
+  }
+
+  addCard(card: Card | null) {
+    if (card) this.cards.push(card)
   }
 
   showCards() {
