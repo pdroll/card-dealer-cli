@@ -1,6 +1,6 @@
 {
   "name": "card-dealer-cli",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "CLI utility for interacting with a deck of cards: pick a random card or deal a hand for a card game",
   "keywords": [
     "cards",

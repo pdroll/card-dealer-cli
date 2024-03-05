@@ -16,8 +16,7 @@ There are two commands available: `pick-a-card` and `deal-a-hand`
 Usage: card-dealer [options] [command]
 
 Options:
-  -p, --perfect-shuffle        Should all randomness be removed when shuffling the deck? (default:
-                               false)
+  -p, --perfect-shuffle        Should all randomness be removed when shuffling the deck? (default:false)
   -t, --shuffle-times <times>  How many times should we shuffle the deck? (default: 7)
   --cut [Y/n]                  Do you want to cut the deck after shuffling?
   -h, --help                   display help for command
@@ -42,7 +41,7 @@ Usage: card-dealer pick-a-card [options]
 Pick a random card or cards from a deck
 
 Options:
-  -d, --deck <deck-type>  What type of deck should we use (choices: "standard", "euchre", "canasta", "pinochle", default: "standard")
+  -d, --deck <deck-type>  What type of deck should we use (choices: "standard", "double", "euchre", "canasta", "pinochle", default: "standard")
   -c, --count <number>    How many cards should be chosen? (default: 1)
   --top                   Should the card be pulled from the top of the deck, rather than at a random point in the deck? (default: false)
   -h, --help              display help for command

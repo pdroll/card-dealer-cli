@@ -8,7 +8,7 @@ import type { DealAHandOpts, GlobalOpts, PickACardOpts } from './commands/types'
 import { gameTypes } from './commands/types'
 import { deckTypeNames } from './lib/deck'
 
-const VERSION = '1.0.2' as const
+const VERSION = '1.0.3' as const
 
 const pickACard = new Command('pick-a-card')
   .description('Pick a random card or cards from a deck')
